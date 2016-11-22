@@ -1,3 +1,8 @@
+/* SCSS */
+/* sass --watch style */
+$trans-pink: #ffdcfc;
+$trans-blue: #c8feff;
+
 /* GENERAL */
 body {
   margin: 0 !important;
@@ -33,7 +38,11 @@ button {
 
 /* HEADER */
 header {
-  background-color: rgba(136,47,125, .2);
+  background-color: $trans-pink;
+}
+.sub-header,
+.sub-footer {
+  background-color: $trans-blue;
 }
 header h2 {
   padding-top: .4em;
@@ -73,7 +82,7 @@ header img {
 .footer {
   width: 100%;
   clear: both;
-  background-color: rgba(136,47,125, .8);
+  background-color: $trans-pink;
   padding: .5em 0 0 !important;
 }
 .footer p {
@@ -171,7 +180,6 @@ header img {
   }
 }
 @media (min-width: 500px) {
-  .questions .movie-single,
   .questions button {
     width: 70%;
   }
@@ -183,10 +191,6 @@ header img {
     margin: auto;
     display: block;
     padding: 2em !important;
-  }
-  .questions .movie-single {
-    float: left;
-    width: 45%;
   }
   .questions button {
     float: right;
@@ -265,11 +269,6 @@ a.lightbox:hover, a.lightbox:focus  {
 .too-bad button,
 .recommended button {
   padding: .3em .7em;
-}
-
-/* Too Bad */
-.too-bad img {
-  width: 100%;
 }
 
 /* LOADING */

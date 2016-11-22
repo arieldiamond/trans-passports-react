@@ -1,8 +1,12 @@
-import React from 'react';
-export default props => {
-	return (
-      <div>
-        <h3>{props.text}</h3>
-      </div>
-  );
-};
+import React, { Component } from 'react';
+
+export default class Question extends Component {
+	render() {
+		const {props} = this;
+		return (
+			<div>
+				<h2>{props.title}</h2>
+			</div>
+		);
+	}
+}
