@@ -6,6 +6,7 @@ export default class Question extends Component {
 		return (
 			<div>
 				<h2>{props.title}</h2>
+
 			</div>
 		);
 	}
