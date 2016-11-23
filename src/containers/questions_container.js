@@ -22,9 +22,8 @@ class QuestionsContainer extends Component {
 	}
 
 	handleClick(order) {
-		console.log('handling');
-		// const nextQ = this.props.questions.filter(q => q.order === order);
-		// this.props.setCurrentQuestion(order, nextQ);
+		const nextQ = this.props.questions.filter(q => q.order === order);
+		this.props.setCurrentQuestion(order, nextQ);
 	}
 
 	startingOver(e) {
@@ -33,22 +32,20 @@ class QuestionsContainer extends Component {
 	}
 
 	render() {
-		// if (this.props.currentQuestion === []) {
-		// 	return (
-		// 	  <div>
-		// 			<button onClick={this.handleClick(1)}>Start!</button>
-		// 		</div>
-		// 	)
-		// } else {
-			return (
-			  <div>
-					<p>I am a question</p>
+		if (this.props.currentQuestion.length === 0) {
+			return <button onClick={() => {this.handleClick(1)}}>Let's Get Started!</button>
+		} else {
+			const question = this.props.currentQuestion[0];
+			return(
+				<div>
+					<h2>{question.topic}</h2>
+					{ question.answers.map( (a, key) => {
+						return <div key={key}><button onClick={() => {this.handleClick(a.next_question_id)}}>{a.answer_text}</button></div>
+					})}
+					<button onClick={this.startingOver}>Start Over</button>
 				</div>
 			)
-		// 			<button	onClick={this.startingOver}>Start Over</button>
-		// 		</div>
-		// 	)
-		// }
+		}
 	}
 }
 

@@ -29,7 +29,7 @@ module.exports = {
 			React: 'react'
 		}),
 		new webpack.DefinePlugin({
-			API_URL: 'http://localhost:3000/api/v1',
+			API_URL: 'http://localhost:6000/api/v1',
 			DEBUG: true
 		})
 	]
