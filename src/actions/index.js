@@ -6,7 +6,8 @@ export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
 export function fetchQuestions() {
 	// TODO: figure out why this const isn't working
 	// const url = `${API_URL}/questions`;
-	const url = 'http://localhost:3000/api/v1/questions';
+	// const url = 'http://localhost:3000/api/v1/questions';
+	const url = 'http://0.0.0.0:3000/api/v1/questions';
 	const request = axios.get(url);
 	return {
 		type: FETCH_QUESTIONS,
