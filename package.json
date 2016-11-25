@@ -58,7 +58,7 @@
   "scripts": {
     "lint": "eslint src || true",
     "clean": "rimraf build",
-    "start": "webpack-dev-server --config webpack.config.js --hot --inline --progress --colors",
+    "start": "webpack-dev-server --host 0.0.0.0 --config webpack.config.js --hot --inline --progress --colors",
     "copy:static": "ncp index.html $npm_package_config_prod_dir/index.html && ncp bundle.js $npm_package_config_prod_dir/bundle.js && ncp style/style.css $npm_package_config_prod_dir/style/style.css && ncp style/style.css.map $npm_package_config_prod_dir/style/style.css.map && ncp style/img/ $npm_package_config_prod_dir/style/img/",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.js'",
     "test:watch": "npm run test -- --watch"
