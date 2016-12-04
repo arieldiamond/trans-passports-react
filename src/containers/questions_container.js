@@ -33,14 +33,24 @@ class QuestionsContainer extends Component {
 
 	render() {
 		if (this.props.currentQuestion.length === 0) {
-			return <button onClick={() => {this.handleClick(1)}}>Let's Get Started!</button>
+			return (
+			  <div>
+			  	<h4>This tool is for transgender and non-binary Americans who need to change the gender on their passports. No matter where you are in your transition or what documents you have, we can help!</h4>
+			 	 	<button onClick={() => {this.handleClick(1)}}>Let's Get Started!</button>
+			 	</div>
+			)
 		} else {
 			const question = this.props.currentQuestion[0];
 			return(
 				<div>
-					<h2>{question.topic}</h2>
+					<h2>{question.question_topic}</h2>
+					<h3>{question.subtitle}</h3>
 					{ question.answers.map( (a, key) => {
-						return <div key={key}><button onClick={() => {this.handleClick(a.next_question_id)}}>{a.answer_text}</button></div>
+						return (
+						  <div key={key}>
+						   	<button onClick={() => {this.handleClick(a.next_question_id)}}>{a.answer_text}</button>
+						  </div>
+						)
 					})}
 					<button onClick={this.startingOver}>Start Over</button>
 				</div>
