@@ -1,10 +1,10 @@
 {
-  "name": "am-dashboard",
+  "name": "trans-passports",
   "version": "1.0.0",
-  "description": "Jellyvision Dashboard for Account Managers",
-  "author": "dana, ariel",
+  "description": "Smoothing the path to a correctly-gendered passport for transgender Americans.",
+  "author": "ariel, mj, dennis, nathan",
   "main": "index.js",
-  "repository": "https://stash.jellyvision.com/projects/AP/repos/am-dashboard/browse",
+  "repository": "https://github.com/arieldiamond/trans-passports-react",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",

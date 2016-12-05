@@ -47,6 +47,12 @@ button {
   padding: 8px;
 }
 
+button.start-over {
+  border: darken($dark-grey, 25%) solid 2px;
+  font-weight: bold;
+  margin-top: 2em;
+}
+
 /* HEADER */
 header,
 .footer {

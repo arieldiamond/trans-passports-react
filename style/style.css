@@ -37,6 +37,11 @@ button {
   margin: .5em;
   padding: 8px; }
 
+button.start-over {
+  border: black solid 2px;
+  font-weight: bold;
+  margin-top: 2em; }
+
 /* HEADER */
 header,
 .footer {

@@ -14,6 +14,16 @@ export function fetchQuestions() {
 	};
 }
 
+export const GET_NEXT_QUESTION = 'GET_NEXT_QUESTION';
+export function getNextQuestion(current, history) {
+	const url = 'http://localhost:3000/api/v1/next_question';
+	const request = axios.post(url, { current, history });
+	return {
+		type: GET_NEXT_QUESTION,
+		payload: request
+	};
+}
+
 // Set current question
 export const SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
 export function setCurrentQuestion(order, nextQuestion) {
