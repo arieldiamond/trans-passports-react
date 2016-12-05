@@ -55,7 +55,10 @@ class QuestionsContainer extends Component {
 		} else {
 			const rec = this.props.currentQuestion;
 			return (
-			  <div>{rec.rec_text}</div>
+			  <div>
+			  	<div>{rec.rec_text}</div>
+			  	<button className="start-over" onClick={this.startingOver}>Start Over</button>
+			  </div>
 			)
 		}
 	}
