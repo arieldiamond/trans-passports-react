@@ -36,7 +36,7 @@ class QuestionsContainer extends Component {
 					<button className="start-over" onClick={this.startingOver}>Start Over</button>
 			 	</div>
 			)
-		} else {
+		} else if (this.props.currentQuestion.answers) {
 			const question = this.props.currentQuestion;
 			return(
 				<div>
@@ -44,13 +44,18 @@ class QuestionsContainer extends Component {
 					<h3>{question.subtitle}</h3>
 					{ question.answers.map( (a, key) => {
 						return (
-						  <div key={key}>
-						   	<button onClick={() => {this.handleClick(a.next_question_id)}}>{a.answer_text}</button>
+						  <div key={a.key}>
+						   	<button onClick={() => {this.handleClick(a.key)}}>{a.answer_text}</button>
 						  </div>
 						)
 					})}
 					<button className="start-over" onClick={this.startingOver}>Start Over</button>
 				</div>
+			)
+		} else {
+			const rec = this.props.currentQuestion;
+			return (
+			  <div>{rec.rec_text}</div>
 			)
 		}
 	}

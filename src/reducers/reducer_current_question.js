@@ -9,7 +9,11 @@ export default function(state = [], action) {
 		case SET_CURRENT_QUESTION:
 			return action.nextQuestion;
 		case GET_NEXT_QUESTION:
-			return action.payload.data.question_group;
+			if (action.payload.data.recommendation) {
+				return action.payload.data.recommendation;
+			} else {
+				return action.payload.data.question_group;
+			}
 		case START_OVER:
 			return [];
 		default:
