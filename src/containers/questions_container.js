@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions, setCurrentQuestion, startOver } from '../actions/index';
+import { fetchQuestions, getNextQuestion, setCurrentQuestion, startOver } from '../actions/index';
 import { Link, browserHistory } from 'react-router';
 import Question from '../components/question';
 import Button from '../components/button';
@@ -17,13 +17,9 @@ class QuestionsContainer extends Component {
 		this.startingOver = this.startingOver.bind(this);
 	}
 
-	componentWillMount() {
-		this.props.fetchQuestions();
-	}
-
-	handleClick(order) {
-		const nextQ = this.props.questions.filter(q => q.order === order);
-		this.props.setCurrentQuestion(order, nextQ);
+	handleClick(key) {
+		const history = this.props.history;
+		this.props.getNextQuestion(key, history);
 	}
 
 	startingOver(e) {
@@ -32,18 +28,37 @@ class QuestionsContainer extends Component {
 	}
 
 	render() {
-		if (this.props.currentQuestion.length === 0) {
-			return <button onClick={() => {this.handleClick(1)}}>Let's Get Started!</button>
-		} else {
-			const question = this.props.currentQuestion[0];
+		if (this.props.history.length === 0) {
+			return (
+			  <div>
+			  	<p>This tool is for transgender and non-binary Americans who need to change the gender on their passports. No matter where you are in your transition or what documents you have, we can help!</p>
+			 	 	<button onClick={() => {this.handleClick('start')}}>Let's Get Started!</button>
+					<button className="start-over" onClick={this.startingOver}>Start Over</button>
+			 	</div>
+			)
+		} else if (this.props.currentQuestion.answers) {
+			const question = this.props.currentQuestion;
 			return(
 				<div>
-					<h2>{question.topic}</h2>
+					<h2>{question.question_text}</h2>
+					<h3>{question.subtitle}</h3>
 					{ question.answers.map( (a, key) => {
-						return <div key={key}><button onClick={() => {this.handleClick(a.next_question_id)}}>{a.answer_text}</button></div>
+						return (
+						  <div key={a.key}>
+						   	<button onClick={() => {this.handleClick(a.key)}}>{a.answer_text}</button>
+						  </div>
+						)
 					})}
-					<button onClick={this.startingOver}>Start Over</button>
+					<button className="start-over" onClick={this.startingOver}>Start Over</button>
 				</div>
+			)
+		} else {
+			const rec = this.props.currentQuestion;
+			return (
+			  <div>
+			  	<div>{rec.rec_text}</div>
+			  	<button className="start-over" onClick={this.startingOver}>Start Over</button>
+			  </div>
 			)
 		}
 	}
@@ -52,8 +67,9 @@ class QuestionsContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		questions: state.questions,
+		history: state.history,
 		currentQuestion: state.currentQuestion
 	};
 }
 
-export default connect( mapStateToProps, { fetchQuestions, setCurrentQuestion, startOver } )(QuestionsContainer);
+export default connect( mapStateToProps, { fetchQuestions, getNextQuestion, setCurrentQuestion, startOver } )(QuestionsContainer);
