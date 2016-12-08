@@ -31,12 +31,7 @@ module.exports = {
 			React: 'react'
 		}),
 		new webpack.DefinePlugin({
-			// API_URL: 'http://localhost:6000/api/v1',
-			API_URL: 'http://0.0.0.0:3000/api/v1',
 			DEBUG: true
-		}),
-		// new webpack.DefinePlugin({
-		//     'process.env.API_URL': JSON.stringify(process.env.API_URL || 'http://localhost:6000/api/v1')
-		// });
+		})
 	]
 };
