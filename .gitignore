@@ -14,8 +14,8 @@ log/*
 tmp
 test/*
 coverage
-node_modules/*
-.sass-cache
+node_modules
+.sass_cache
 
 .byebug_history
 .DS_Store

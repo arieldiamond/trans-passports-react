@@ -1,38 +1,38 @@
-/* global API_URL */
-import axios from 'axios';
-
-// Import questions
-export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
-export function fetchQuestions() {
-	// TODO: figure out why this const isn't working
-	// const url = `${API_URL}/questions`;
-	const url = 'http://localhost:3000/api/v1/questions';
-	// const url = 'http://0.0.0.0:3000/api/v1/questions';
-	const request = axios.get(url);
-	return {
-		type: FETCH_QUESTIONS,
-		payload: request
+// Import JSON into nodes
+export const PROCESS_NODES = 'PROCESS_NODES';
+export function processNodes(data) {
+	return (dispatch, getState) => {
+		dispatch({
+			type: PROCESS_NODES,
+			data
+		});
+		return new Promise(resolve => getState().nodes);
 	};
 }
 
-export const GET_NEXT_QUESTION = 'GET_NEXT_QUESTION';
-export function getNextQuestion(current, history) {
-	const url = 'http://localhost:3000/api/v1/next_question';
-	// const url = 'http://0.0.0.0:3000/api/v1/next_question';
-	const request = axios.post(url, { current, history });
+export const SET_CURRENT_NODE = 'SET_CURRENT_NODE';
+export function setCurrentNode(key, node) {
 	return {
-		type: GET_NEXT_QUESTION,
-		payload: request
+		type: SET_CURRENT_NODE,
+		key,
+		node
 	};
 }
 
-// Set current question
-export const SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
-export function setCurrentQuestion(order, nextQuestion) {
+export const ADD_RECOMMENDATION = 'ADD_RECOMMENDATION';
+export function addRecommendation(key, result) {
 	return {
-		type: SET_CURRENT_QUESTION,
-		order,
-		nextQuestion
+		type: ADD_RECOMMENDATION,
+		key,
+		result
+	};
+}
+
+export const DELIVER_RECOMMENDATIONS = 'DELIVER_RECOMMENDATIONS';
+export function deliverRecommendations(node) {
+	return {
+		type: DELIVER_RECOMMENDATIONS,
+		node
 	};
 }
 

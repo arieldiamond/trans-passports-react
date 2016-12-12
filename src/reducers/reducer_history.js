@@ -1,12 +1,12 @@
 import {
-  GET_NEXT_QUESTION,
+  SET_CURRENT_NODE,
   START_OVER
 } from '../actions/index';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
 	switch (action.type) {
-		case GET_NEXT_QUESTION:
-			return [...state,	action.payload.data.question_group];
+		case SET_CURRENT_NODE:
+			return { ...state,	key: action.node };
 		case START_OVER:
 			return [];
 		default:
