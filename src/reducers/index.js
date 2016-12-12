@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-import QuestionsReducer from './reducer_questions';
+import NodesReducer from './reducer_nodes';
 import HistoryReducer from './reducer_history';
-import CurrentQuestionReducer from './reducer_current_question';
+import CurrentNodeReducer from './reducer_current_node';
+import RecommendationsReducer from './reducer_recommendations';
 
 const rootReducer = combineReducers({
-	questions: QuestionsReducer,
+	nodes: NodesReducer,
+	currentNode: CurrentNodeReducer,
 	history: HistoryReducer,
-	currentQuestion: CurrentQuestionReducer
+	recommendations: RecommendationsReducer
 });
 
 export default rootReducer;

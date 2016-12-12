@@ -1,11 +1,38 @@
+// Import JSON into nodes
+export const PROCESS_NODES = 'PROCESS_NODES';
+export function processNodes(data) {
+	return (dispatch, getState) => {
+		dispatch({
+			type: PROCESS_NODES,
+			data
+		});
+		return new Promise(resolve => getState().nodes);
+	};
+}
 
-// Set current question
-export const SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
-export function setCurrentQuestion(order, nextQuestion) {
+export const SET_CURRENT_NODE = 'SET_CURRENT_NODE';
+export function setCurrentNode(key, node) {
 	return {
-		type: SET_CURRENT_QUESTION,
-		order,
-		nextQuestion
+		type: SET_CURRENT_NODE,
+		key,
+		node
+	};
+}
+
+export const ADD_RECOMMENDATION = 'ADD_RECOMMENDATION';
+export function addRecommendation(key, result) {
+	return {
+		type: ADD_RECOMMENDATION,
+		key,
+		result
+	};
+}
+
+export const DELIVER_RECOMMENDATIONS = 'DELIVER_RECOMMENDATIONS';
+export function deliverRecommendations(node) {
+	return {
+		type: DELIVER_RECOMMENDATIONS,
+		node
 	};
 }
 

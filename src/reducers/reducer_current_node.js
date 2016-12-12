@@ -1,11 +1,14 @@
 import {
-  FETCH_QUESTIONS
+	SET_CURRENT_NODE,
+  START_OVER
 } from '../actions/index';
 
 export default function(state = [], action) {
 	switch (action.type) {
-		case FETCH_QUESTIONS:
-			return action.payload.data.questions;
+		case SET_CURRENT_NODE:
+			return { key: action.key, node: action.node};
+		case START_OVER:
+			return [];
 		default:
 			return state;
 	}
