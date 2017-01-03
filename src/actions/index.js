@@ -23,8 +23,7 @@ export const ADD_RECOMMENDATION = 'ADD_RECOMMENDATION';
 export function addRecommendation(key, result) {
 	return {
 		type: ADD_RECOMMENDATION,
-		key,
-		result
+		key
 	};
 }
 

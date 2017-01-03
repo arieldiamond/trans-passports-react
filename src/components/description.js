@@ -5,7 +5,6 @@ export default class Description extends Component {
 		const {props} = this;
 		return (
 			<div>
-				Description
 				<h3>{props.node.text}</h3>
 			</div>
 		);
