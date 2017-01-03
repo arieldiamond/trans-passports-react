@@ -3,19 +3,16 @@ import {
   START_OVER
 } from '../actions/index';
 
-
-
 export default function(state = [], action) {
 	switch (action.type) {
 		case ADD_RECOMMENDATION:
-
-			if (action.result === '{}') {
+			if (action.result === {}) {
 				return state;
 			} else {
-				return [...state, { key: action.key, result: action.result }];
+				return [...state, action.key];
 			}
 		case START_OVER:
-			return {};
+			return [];
 		default:
 			return state;
 	}

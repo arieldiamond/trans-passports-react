@@ -36,7 +36,8 @@ a:hover, a:focus {
     width: 90%;
   }
 }
-button {
+button,
+.link-box {
   color: $dark-grey;
   font-family: $main-font !important;
   font-size: 16px;
@@ -54,6 +55,9 @@ button.start-over {
 }
 
 /* HEADER */
+header {
+  padding: 1em 1em 1em;
+}
 header,
 .footer {
   background-color: darken($trans-blue, 30%);
@@ -62,40 +66,17 @@ header,
 .sub-footer {
   background-color: lighten($trans-pink, 8%);
 }
+header h1 {
+  font-size: 3em;
+  text-align: center;
+}
 header h2 {
   padding-top: .4em;
 }
-header img {
-  vertical-align: middle;
-  height: 2em;
-}
-@media (min-width: 0px) {
-  header {
-    padding: 1em 1em 1em;
-  }
-  header h1 {
-    font-size: 3em;
-    text-align: center;
-  }
-  .sub-header h2 {
-    font-family: $main-font;
-    font-size: 18px;
-    text-align: center;
-  }
-}
-@media (min-width: 980px) {
-  header {
-    padding: 1em 5em 4em;
-    text-align: left;
-  }
-  header h1 {
-    font-size: 30px;
-    float: left;
-  }
-  .sub-header h2 {
-    font-size: 20px;
-    float: right;
-  }
+.sub-header h2 {
+  font-family: $main-font;
+  font-size: 18px;
+  text-align: center;
 }
 
 /* FOOTER */
