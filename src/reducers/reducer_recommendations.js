@@ -1,16 +1,12 @@
 import {
-	ADD_RECOMMENDATION,
+	PROCESS_RECOMMENDATIONS,
   START_OVER
 } from '../actions/index';
 
 export default function(state = [], action) {
 	switch (action.type) {
-		case ADD_RECOMMENDATION:
-			if (action.result === {}) {
-				return state;
-			} else {
-				return [...state, action.key];
-			}
+		case PROCESS_RECOMMENDATIONS:
+			return action.data;
 		case START_OVER:
 			return [];
 		default:
