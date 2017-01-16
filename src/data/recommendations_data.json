@@ -1,12 +1,27 @@
 {
   "ds_11": {
-    "text": "You need a DS-11!",
+    "text": "You need to fill out a DS-11!",
     "button_text": "Get the form",
     "resource": "https://www.state.gov/documents/organization/212239.pdf"
   },
   "ds_82": {
-    "text": "You need a DS-82!",
+    "text": "You need to fill out a DS-82!",
     "button_text": "Get the form",
     "resource": "https://www.state.gov/documents/organization/212241.pdf"
+  },
+  "apply-citizen_yes": {
+    "text": "Since you're interesting in becoming a US citizen, you can check out the process and requirements at the US Citizenship and Immigration Services website:",
+    "button_text": "USCIS Website",
+    "resource": "https://www.uscis.gov/us-citizenship"
+  },
+  "apply-citizen_no": {
+    "text": "So sorry we couldn't help -- best of luck!",
+    "button_text": "",
+    "resource": ""
+  },
+  "no_change": {
+    "text": "Thanks for checking us out! Unfortunately, this app is specifically for updating gender markers for transgender individuals. This link will take you through the State Department passport application wizard. It can help you with name changes, correcting errors, and simple applications.",
+    "button_text": "State Department Wizard",
+    "resource": "https://travel.state.gov/content/passports/en/passports/apply.html"
   }
 }

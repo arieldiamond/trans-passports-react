@@ -17,15 +17,19 @@ class RecommendationsContainer extends Component {
 	}
 
 	collectRecommendations() {
-		const recNextNodes = JSON.parse(this.props.currentNode.node.next);
-		if (recNextNodes.length === 1 && recNextNodes[0].resource) {
-			return (<div><a className="link-box" href={recNextNodes[0].resource} target="_blank">{recNextNodes[0].label}</a><br /></div>)
-		} else {
-			return this.props.recommendations;
+		const recs = this.props.recommendations;
+		const results = this.props.results;
+		const myRecommendations = []
+
+		for (var key in recs) {
+			myRecommendations.push(recs[key]);
 		}
-		this.props.recommendations.map( r => {
-			console.log(r);
+
+		myRecommendations.map( r => {
+
 		})
+
+		return myRecommendations;
 	}
 
 	startingOver(e) {
@@ -36,19 +40,36 @@ class RecommendationsContainer extends Component {
 	}
 
 	render() {
-		return (
-		  <div>
-		  	<h3>You made it!</h3>
-		  	<p>If you follow these steps, you'll have a new passport in a few weeks.</p>
-		  	<p>This is what you need to do:</p>
-		  	<ol>
-		  		<li>Fill out this form: </li>
-		  		<li>Get your doctor to fill out their details and print it on their letterhead: </li>
-		  		<li>Go get a photo here: </li>
-		  	</ol>
-		  	<button className='start-over' onClick={this.startingOver}>Start Over</button>
-		  </div>
-		);
+		const myRecommendations = this.collectRecommendations();
+		const results = this.props.results;
+		if (results.eligible && results.change_gender) {
+			return (
+				<div>
+					<h3>You made it!</h3>
+					<p>If you follow these steps, you'll have a new passport in a few weeks.</p>
+					<p>This is what you need to do:</p>
+					<ol>
+						{ myRecommendations.map( (r, key) => {
+							return (
+								<li key={key}>{r.text} <button onClick={this.startingOver}>{r.button_text}</button></li>
+							)
+						})}
+					</ol>
+					<button className='start-over' onClick={this.startingOver}>Start Over</button>
+				</div>
+			);
+		} else if (results.no_change) {
+			return (
+				<div>
+					Sorry about that<br />
+					<button className='start-over' onClick={this.startingOver}>Start Over</button>
+				</div>
+			)
+		} else {
+			return (<div>boop<br />
+					<button className='start-over' onClick={this.startingOver}>Start Over</button>
+			</div>)
+		}
 	}
 }
 
@@ -57,6 +78,7 @@ function mapStateToProps(state) {
 		nodes: state.nodes,
 		currentNode: state.currentNode,
 		history: state.history,
+		results: state.results,
 		recommendations: state.recommendations
 	};
 }
