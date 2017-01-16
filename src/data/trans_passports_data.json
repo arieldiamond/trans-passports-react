@@ -1,122 +1,145 @@
 {
-   "intro:d:intro": {
-      "text": "Welcome to our utility for helping members of the trans community obtain US passports with their correct gender marker and name!",
-      "next": "[{\"key\": \"eligibility:q:is_citizen\", \"label\": \"Start!\"}]",
-      "type": "description",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "intro",
-      "result": "{}",
-      "depends_on": "{}"
-   },
-   "eligibility:q:is_citizen": {
-      "text": "First, let's check if you can receive a passport: Are you a US citizen?",
-      "next": "[{\"key\": \"eligibility:a:is_citizen\", \"label\": \"\"}, {\"key\": \"eligibility:a:is_non-citizen-national\", \"label\": \"\"}, {\"key\": \"eligibility:a:is_non-citizen\", \"label\": \"\"}]",
-      "type": "question",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{}",
-      "depends_on": "{}"
-   },
-   "eligibility:a:is_citizen": {
-      "text": "Yep, I'm a US citizen!",
-      "next": "[{\"key\": \"elibility:r:is_citizen\", \"label\": \"\"}]",
-      "type": "answer",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{\"eligible\": true, \"citizen\": true}",
-      "depends_on": "{}"
-   },
-   "eligibility:a:is_non-citizen-national": {
-      "text": "I'm a US non-citizen national, actually.",
-      "next": "[{\"key\": \"elibility:r:is_non-citizen-national\", \"label\": \"\"}]",
-      "type": "answer",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{\"eligible\": true, \"non-citizen-national\": true}",
-      "depends_on": "{}"
-   },
-   "eligibility:a:is_non-citizen": {
-      "text": "No, I am neither.",
-      "next": "[{\"key\": \"eligibility:q:is_non-citizen\", \"label\": \"\"}]",
-      "type": "answer",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{\"eligible\": false}",
-      "depends_on": "{}"
-   },
-   "elibility:r:is_citizen": {
-      "text": "Great, you can get a US passport!",
-      "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
-      "type": "recommendation",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{}",
-      "depends_on": "{\"eligible\": true}"
-   },
-   "elibility:r:is_non-citizen-national": {
-      "text": "Great, you can get a US passport!",
-      "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
-      "type": "recommendation",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{}",
-      "depends_on": "{\"eligible\": true}"
-   },
-   "eligibility:q:is_non-citizen": {
-      "text": "Unfortunately, US citizenship or being a US non-citizen national is a requirement of obtaining a US passport. Are you interesting in applying for citizenship?",
-      "next": "[{\"key\": \"eligibility:a:apply-citizen_yes\", \"label\": \"\"}, {\"key\": \"eligibility:a:apply-citizen_no\", \"label\": \"\"}]",
-      "type": "question",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "{}",
-      "depends_on": "{\"eligible\": false}"
-   },
-   "eligibility:a:apply-citizen_yes": {
-      "text": "Yes!",
-      "next": "[{\"key\": \"eligibility:r:apply-citizen\", \"label\": \"\"}]",
-      "type": "answer",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "",
-      "depends_on": "{\"eligible\": false}"
-   },
-   "eligibility:a:apply-citizen_no": {
-      "text": "No thanks.",
-      "next": "[{\"key\": \"eligibility:r:apply-citizen_no\", \"label\": \"\"}]",
-      "type": "answer",
-      "backlink": "",
-      "next_on_complete": null,
-      "section": "eligibility",
-      "result": "",
-      "depends_on": "{\"eligible\": false}"
-   },
-   "eligibility:r:apply-citizen": {
-      "text": "Since you're interesting in becoming a US citizen, you can check out the process and requirements at the US Citizenship and Immigration Services website:",
-      "next": "[{\"key\": \"\", \"label\": \"USCIS Website\", \"resource\": \"https://www.uscis.gov/us-citizenship\"}]",
-      "type": "recommendation",
-      "backlink": "",
-      "next_on_complete": true,
-      "section": "eligibility",
-      "result": "{\"status\": \"complete\"}",
-      "depends_on": "{\"eligible\": false}"
-   },
-   "eligibility:r:apply-citizen_no": {
-      "text": "So sorry we couldn't help -- best of luck!",
-      "next": "[]",
-      "type": "recommendation",
-      "backlink": "",
-      "next_on_complete": true,
-      "section": "eligibility",
-      "result": "{\"status\": \"complete\"}",
-      "depends_on": "{\"eligible\": false}"
-   }
+  "intro:d:intro": {
+    "text": "So you want to change your passport's gender marker and name?",
+    "next": "[{\"key\": \"eligibility:q:is_citizen\", \"label\": \"Start!\"}]",
+    "type": "description",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "intro",
+    "result": "{\"status\": \"in_progress\"}",
+    "depends_on": "{}",
+    "resource?": ""
+  },
+  "eligibility:q:is_citizen": {
+    "text": "First, let's check if you can receive a passport: Are you a US citizen?",
+    "next": "[{\"key\": \"eligibility:a:is_citizen\", \"label\": \"\"}, {\"key\": \"eligibility:a:is_non-citizen-national\", \"label\": \"\"}, {\"key\": \"eligibility:a:is_non-citizen\", \"label\": \"\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{}",
+    "depends_on": "{}",
+    "resource?": ""
+  },
+  "eligibility:a:is_citizen": {
+    "text": "Yep, I'm a US citizen!",
+    "next": "[{\"key\": \"elibility:r:is_citizen\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{\"eligible\": true, \"citizen\": true}",
+    "depends_on": "{}",
+    "resource?": ""
+  },
+  "eligibility:a:is_non-citizen-national": {
+    "text": "I'm a US non-citizen national, actually.",
+    "next": "[{\"key\": \"elibility:r:is_non-citizen-national\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{\"eligible\": true, \"non-citizen-national\": true}",
+    "depends_on": "{}",
+    "resource?": ""
+  },
+  "eligibility:a:is_non-citizen": {
+    "text": "No, I am neither.",
+    "next": "[{\"key\": \"eligibility:q:is_non-citizen\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{\"eligible\": false}",
+    "depends_on": "{}",
+    "resource?": ""
+  },
+  "elibility:r:is_citizen": {
+    "text": "Great, you can get a US passport!",
+    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "TRUE",
+    "section": "eligibility",
+    "result": "{\"status\": \"complete\"}",
+    "depends_on": "{\"eligible\": true}",
+    "resource?": ""
+  },
+  "elibility:r:is_non-citizen-national": {
+    "text": "Great, you can get a US passport!",
+    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "TRUE",
+    "section": "eligibility",
+    "result": "{\"status\": \"complete\"}",
+    "depends_on": "{\"eligible\": true}",
+    "resource?": ""
+  },
+  "eligibility:q:is_non-citizen": {
+    "text": "Unfortunately, US citizenship or being a US non-citizen national is a requirement of obtaining a US passport. Are you interesting in applying for citizenship?",
+    "next": "[{\"key\": \"eligibility:a:apply-citizen_yes\", \"label\": \"\"}, {\"key\": \"eligibility:a:apply-citizen_no\", \"label\": \"\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{}",
+    "depends_on": "{\"eligible\": false}",
+    "resource?": ""
+  },
+  "eligibility:a:apply-citizen_yes": {
+    "text": "Yes!",
+    "next": "[{\"key\": \"eligibility:r:apply-citizen\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{}",
+    "depends_on": "{\"eligible\": false}",
+    "resource?": ""
+  },
+  "eligibility:a:apply-citizen_no": {
+    "text": "No thanks.",
+    "next": "[{\"key\": \"eligibility:r:apply-citizen_no\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "eligibility",
+    "result": "{}",
+    "depends_on": "{\"eligible\": false}",
+    "resource?": ""
+  },
+  "eligibility:r:apply-citizen": {
+    "text": "Since you're interesting in becoming a US citizen, you can check out the process and requirements at the US Citizenship and Immigration Services website:",
+    "next": "[{\"key\": \"\", \"label\": \"USCIS Website\", \"resource\": \"https://www.uscis.gov/us-citizenship\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "TRUE",
+    "section": "eligibility",
+    "result": "{\"status\": \"complete\"}",
+    "depends_on": "{\"eligible\": false}",
+    "resource?": ""
+  },
+  "eligibility:r:apply-citizen_no": {
+    "text": "So sorry we couldn't help -- best of luck!",
+    "next": "",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "TRUE",
+    "section": "eligibility",
+    "result": "{\"status\": \"complete\"}",
+    "depends_on": "{\"eligible\": false}",
+    "resource?": ""
+  },
+  "id": {
+    "text": "text",
+    "next": "next",
+    "type": "type",
+    "backlink": "backlink",
+    "next_on_complete": "next_on_complete",
+    "section": "section",
+    "result": "result",
+    "depends_on": "depends_on",
+    "resource?": "resource?"
+  }
 }
