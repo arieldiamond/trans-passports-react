@@ -9,7 +9,7 @@ export default function(state = {}, action) {
 			if ( action.result == null || Object.keys(action.result).length === 0 ) {
 				return state;
 			} else {
-				return Object.assign({}, action.result);
+				return Object.assign({}, state, action.result);
 			}
 		case START_OVER:
 			return {};

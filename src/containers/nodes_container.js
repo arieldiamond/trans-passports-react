@@ -29,52 +29,36 @@ class NodesContainer extends Component {
 		this.props.processRecommendations(recommendationsData);
 	}
 
-	displayNext(node) {
-		const next = JSON.parse(node.next);
-		const buttons =	[]
+	displayNext(type, next) {
+		const parsed = JSON.parse(next);
+		const nextSteps =	[]
 
-		next.map(a => {
-			if(a.next_on_complete) {
-				this.pushToRecommendations();
-			} else {
-				buttons.push({node: this.props.nodes[a.key], label: a.label, key: a.key});
-			}
+		parsed.map( n => {
+			nextSteps.push({node: this.props.nodes[n.key], label: n.label, key: n.key});
 		})
 
-		if(buttons.length === 1) {
-			const nextNode = buttons[0];
-			const text = nextNode.label ? nextNode.label : 'Next!';
-			return this.answerButton(nextNode.key, nextNode.node, text);
-
-		}	else if(buttons.length > 1) {
-			return buttons.map((b, key) => {
-				if (b.node && b.node.next) {
-					const text = b.label ? b.label : b.node.text;
-					const nextKey = b.node.next ? JSON.parse(b.node.next) : null;
-					if (nextKey.length > 0) {
-						const next = this.props.nodes[nextKey[0].key]
-						return this.answerButton(b.key, next, text);
-					} else {
-						if (this.props.recommendations.length > 0) {
-	  					this.pushToRecommendations();
-						} else {
-							// return this.answerButton(b.key, next, text);
-						}
-	  			}
-	  		}
-	  	})
-		}	else {
-			this.pushToRecommendations();
+		if(type === 'description' || type === 'recommendation') {
+			const text = nextSteps[0].label || 'Next!';
+			return this.answerButton(nextSteps[0].key, nextSteps[0].node, text);
+		} else if(type === 'question') {
+			return nextSteps.map( n => {
+				const text = n.label || n.node.text;
+				return this.answerButton(n.key, n.node, text);
+			})
+		} else if(type === 'answer') {
+			this.handleClick(nextSteps[0].key, nextSteps[0].node);
 		}
 	}
 
-	handleClick(key, node) {
-		this.props.addResult(key, JSON.parse(this.props.currentNode.node.result));
-		this.props.setCurrentNode(key, node);
+	answerButton(nextKey, nextNode, text) {
+		return (<div key={nextKey}><button onClick={() => this.handleClick(nextKey, nextNode)}>{text}</button><br /></div>)
 	}
 
-	answerButton(key, nextNode, text) {
-		return (<div key={key}><button onClick={() => this.handleClick(key, nextNode)}>{text}</button><br /></div>)
+	handleClick(nextKey, nextNode) {
+		if (this.props.nodes[nextKey].result) {
+			this.props.addResult(nextKey, JSON.parse(this.props.nodes[nextKey].result));
+		}
+		this.props.setCurrentNode(nextKey, nextNode);
 	}
 
 	pushToRecommendations() {
@@ -89,7 +73,7 @@ class NodesContainer extends Component {
 	}
 
 	render() {
-		if(this.props.currentNode.node.next_on_complete) {
+		if(this.props.currentNode.node.next_on_complete || !this.props.currentNode.node.next) {
 			return (
 			  <div>
 				  <h3>You're all done!</h3>
@@ -101,7 +85,7 @@ class NodesContainer extends Component {
 			return (
 				<div>
 					<h3>{this.props.currentNode.node.text}</h3>
-					{this.displayNext(this.props.currentNode.node)}
+					{this.displayNext(this.props.currentNode.node.type, this.props.currentNode.node.next)}
 					<button className='start-over' onClick={this.startingOver}>Start Over</button>
 				</div>
 			)
