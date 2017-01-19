@@ -46,7 +46,7 @@ class NodesContainer extends Component {
 				return this.answerButton(n.key, n.node, text);
 			})
 		} else if(type === 'answer') {
-			this.handleClick(nextSteps[0].key, nextSteps[0].node)
+			this.handleClick(nextSteps[0].key, nextSteps[0].node);
 		}
 	}
 

@@ -1,14 +1,13 @@
 {
   "intro:d:intro": {
-    "text": "So you want to change your passport's gender marker?",
+    "text": "So, you want to change your passport's gender marker?",
     "next": "[{\"key\": \"eligibility:q:is_citizen\", \"label\": \"Start!\"}]",
     "type": "description",
     "backlink": "",
     "next_on_complete": "",
     "section": "intro",
     "result": "{\"status\": \"in_progress\"}",
-    "depends_on": "{}",
-    "resource?": ""
+    "depends_on": "{}"
   },
   "eligibility:q:is_citizen": {
     "text": "First, let's check if you can receive a passport: Are you a US citizen?",
@@ -18,107 +17,47 @@
     "next_on_complete": "",
     "section": "eligibility",
     "result": "",
-    "depends_on": "{}",
-    "resource?": ""
+    "depends_on": "{}"
   },
   "eligibility:a:is_citizen": {
     "text": "Yep, I'm a US citizen!",
-    "next": "[{\"key\": \"elibility:r:is_citizen\", \"label\": \"\"}]",
+    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"\"}]",
     "type": "answer",
     "backlink": "",
     "next_on_complete": "",
     "section": "eligibility",
     "result": "{\"eligible\": true, \"citizen\": true}",
-    "depends_on": "{}",
-    "resource?": ""
+    "depends_on": "{}"
   },
   "eligibility:a:is_non-citizen-national": {
     "text": "I'm a US non-citizen national, actually.",
-    "next": "[{\"key\": \"elibility:r:is_non-citizen-national\", \"label\": \"\"}]",
+    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"\"}]",
     "type": "answer",
     "backlink": "",
     "next_on_complete": "",
     "section": "eligibility",
-    "result": "{\"eligible\": true, \"non-citizen-national\": true}",
-    "depends_on": "{}",
-    "resource?": ""
+    "result": "{\"eligible\": true, \"non_citizen_national\": true}",
+    "depends_on": "{}"
   },
   "eligibility:a:is_non-citizen": {
     "text": "No, I am neither.",
-    "next": "[{\"key\": \"eligibility:q:is_non-citizen\", \"label\": \"\"}]",
-    "type": "answer",
-    "backlink": "",
-    "next_on_complete": "",
-    "section": "eligibility",
-    "result": "{\"eligible\": false}",
-    "depends_on": "{}",
-    "resource?": ""
-  },
-  "elibility:r:is_citizen": {
-    "text": "Great, you can get a US passport!",
-    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
-    "type": "recommendation",
-    "backlink": "",
-    "next_on_complete": "",
-    "section": "eligibility",
-    "result": "",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
-  },
-  "elibility:r:is_non-citizen-national": {
-    "text": "Great, you can get a US passport!",
-    "next": "[{\"key\": \"trans:q:is_trans\", \"label\": \"Next!\"}]",
-    "type": "recommendation",
-    "backlink": "",
-    "next_on_complete": "",
-    "section": "eligibility",
-    "result": "",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
-  },
-  "eligibility:q:is_non-citizen": {
-    "text": "Unfortunately, US citizenship or being a US non-citizen national is a requirement of obtaining a US passport. Are you interesting in applying for citizenship?",
-    "next": "[{\"key\": \"eligibility:a:apply-citizen_yes\", \"label\": \"\"}, {\"key\": \"eligibility:a:apply-citizen_no\", \"label\": \"\"}]",
-    "type": "question",
-    "backlink": "",
-    "next_on_complete": "",
-    "section": "eligibility",
-    "result": "",
-    "depends_on": "{\"eligible\": false}",
-    "resource?": ""
-  },
-  "eligibility:a:apply-citizen_yes": {
-    "text": "Yes!",
     "next": "",
     "type": "answer",
     "backlink": "",
     "next_on_complete": "TRUE",
     "section": "eligibility",
-    "result": "{\"apply_citizen\": true}",
-    "depends_on": "{\"eligible\": false}",
-    "resource?": ""
-  },
-  "eligibility:a:apply-citizen_no": {
-    "text": "No thanks.",
-    "next": "",
-    "type": "answer",
-    "backlink": "",
-    "next_on_complete": "TRUE",
-    "section": "eligibility",
-    "result": "{\"apply_citizen\": false}",
-    "depends_on": "{\"eligible\": false}",
-    "resource?": ""
+    "result": "{\"eligible\": false, \"citizen\": false}",
+    "depends_on": "{}"
   },
   "trans:q:is_trans": {
-    "text": "Great! This application is specifically for members of the transgender and non-binary community, to assist in the process of changing gender markers. Are you transgender or non-binary, or the parent of a transgender/non-binary child under 16?",
+    "text": "Great! This application is specifically for members of the transgender and non-binary community. Are you transgender or non-binary, or the parent of a transgender/non-binary child under 16?",
     "next": "[{\"key\": \"trans:a:is_trans-binary\", \"label\": \"\"}, {\"key\": \"trans:a:is_trans-nonbinary\", \"label\": \"\"}, {\"key\": \"trans:a:is_trans-parent\", \"label\": \"\"}, {\"key\": \"trans:a:is_trans-name_only\"},  {\"key\": \"trans:a:is_trans-none-of-the-above\", \"label\": \"\"}]",
     "type": "question",
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:a:is_trans-binary": {
     "text": "I am transgender and I need to change my gender marker from my birth gender.",
@@ -127,9 +66,8 @@
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
-    "result": "{\"is_trans\": true, \"is_binary\": true, \"change-gender\": \"true\", \"is_parent\": false}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "result": "{\"is_trans\": true, \"is_binary\": true, \"change_gender\": true, \"is_parent\": false}",
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:a:is_trans-nonbinary": {
     "text": "I do not identify as either male or female, and I need help deciding how to handle that in my passport application.",
@@ -138,9 +76,8 @@
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
-    "result": "{\"is_trans\": true, \"is_binary\": false, \"change-gender\": \"true\", \"is_parent\": false}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "result": "{\"is_trans\": true, \"is_binary\": false, \"change_gender\": true, \"is_parent\": false}",
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:a:is_trans-parent": {
     "text": "I'm helping my transgender/non-binary child with their passport!",
@@ -149,9 +86,8 @@
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
-    "result": "{\"is_trans\": true, \"change-gender\": \"true\", \"is_parent\": true}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "result": "{\"is_trans\": true, \"change_gender\": true, \"is_parent\": true}",
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:a:is_trans-name_only": {
     "text": "I only need to change my name.",
@@ -160,9 +96,8 @@
     "backlink": "",
     "next_on_complete": "TRUE",
     "section": "trans",
-    "result": "{\"name-only\": true, \"no_change\": true}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "result": "{\"name_only\": true, \"no_change\": true}",
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:a:is_trans-none-of-the-above": {
     "text": "None of the above",
@@ -172,30 +107,27 @@
     "next_on_complete": "TRUE",
     "section": "trans",
     "result": "{\"is_trans\": false, \"no_change\": true}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true}"
   },
   "trans:q:is_trans-non-binary": {
     "text": "Unfortunately, the only gender markers currently available for US passports are male and female. We know, we know. Which of these best describes you?",
-    "next": "[{\"key\": \"trans:a:non_binary-change-gender\", \"label\": \"\"}, {\"key\": \"trans:a:non_binary-change-name\", \"label\": \"\"}, {\"key\": \"trans:a:non_binary-change-neither\", \"label\": \"\"}]",
+    "next": "[{\"key\": \"trans:a:non_binary-change_gender\", \"label\": \"\"}, {\"key\": \"trans:a:non_binary-change-name\", \"label\": \"\"}, {\"key\": \"trans:a:non_binary-change-neither\", \"label\": \"\"}]",
     "type": "question",
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true}"
   },
-  "trans:a:non_binary-change-gender": {
+  "trans:a:non_binary-change_gender": {
     "text": "I am non-binary and the binary gender that best reflects me is not my birth gender. I would like to change the gender marker on my passport.",
     "next": "[{\"key\": \"trans:q:has_currently-transitioning-passport\", \"label\": \"\"}]",
     "type": "answer",
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
-    "result": "{\"change-gender\": \"true\"}",
-    "depends_on": "",
-    "resource?": ""
+    "result": "{\"change_gender\": true}",
+    "depends_on": ""
   },
   "trans:a:non_binary-change-name": {
     "text": "I am non-binary and the binary gender that best reflects me is actually my birth gender. I don't need to change my gender marker, but I do need to change my name.",
@@ -204,9 +136,8 @@
     "backlink": "",
     "next_on_complete": "TRUE",
     "section": "trans",
-    "result": "{\"change-gender\": \"false\",  \"no_change\": true, \"name-only\": true}",
-    "depends_on": "",
-    "resource?": ""
+    "result": "{\"change_gender\": false,  \"no_change\": true, \"name_only\": true}",
+    "depends_on": ""
   },
   "trans:a:non_binary-change-neither": {
     "text": "I'm non-binary and I do not need to change my name or gender.",
@@ -216,8 +147,7 @@
     "next_on_complete": "TRUE",
     "section": "trans",
     "result": "{\"no_change\": true}",
-    "depends_on": "",
-    "resource?": ""
+    "depends_on": ""
   },
   "trans:r:is_trans-parent": {
     "text": "Hey, that's pretty awesome of you! Also awesome: All of the requirements are going to be exactly the same as for an adult, with the addition of consent from their parent(s) or guardian(s), and proof of that relationship.",
@@ -227,8 +157,7 @@
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true, \"is_parent\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_parent\": true}"
   },
   "trans:q:has_currently-transitioning-passport": {
     "text": "Okay, cool! Do you already have a valid one of those two year, limited \"currently transitioning\" passports?",
@@ -238,8 +167,7 @@
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_trans\": true}"
   },
   "trans:a:has_currently-transitioning-passport": {
     "text": "Sure do!",
@@ -249,8 +177,7 @@
     "next_on_complete": "TRUE",
     "section": "trans",
     "result": "{\"has_limited_passport\": true}",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_trans\": true}"
   },
   "trans:a:not_has_currently-transitioning-passport": {
     "text": "Nope.",
@@ -260,8 +187,7 @@
     "next_on_complete": "TRUE",
     "section": "trans",
     "result": "{\"has_limited_passport\": false}",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_trans\": true}"
   },
   "trans:a:unsure_has_currently-transitioning-passport": {
     "text": "[WIP] I'm not sure.",
@@ -270,9 +196,8 @@
     "backlink": "",
     "next_on_complete": "",
     "section": "trans",
-    "result": "",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true}",
-    "resource?": ""
+    "result": "{\"has_limited_passport\": false}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true}"
   },
   "trans:r:has_currently-transitioning-passport": {
     "text": "Gotcha. Well, there's a special, streamlined process for you to get your 10 year passport!",
@@ -282,8 +207,7 @@
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
   },
   "trans:r:not_has_currently-transitioning-passport": {
     "text": "Alrighty, so we're doing the whole shebang!",
@@ -293,7 +217,396 @@
     "next_on_complete": "",
     "section": "trans",
     "result": "{}",
-    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": false}",
-    "resource?": ""
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": false}"
+  },
+  "location:a:no": {
+    "text": "Naw, I'm good.",
+    "next": "[{\"key\": \"summary:d:intro1\", \"label\": \"Finish up\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "location",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "location:a:yes": {
+    "text": "Yes, please! Some options would be nice.",
+    "next": "[{\"key\": \"location:q:where\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "location",
+    "result": "{\"location_help\": true}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "location:q:intro": {
+    "text": "Would you like some info on where to do all of this?",
+    "next": "[{\"key\": \"location:a:yes\", \"label\": \"\"}, {\"key\": \"location:a:no\", \"label\": \"\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "location",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "location:q:where": {
+    "text": "Sure thing! Where abouts do you live?",
+    "next": "[{\"key\": \"location:q:where\", \"label\": \"\", \"input\": \"text\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "location",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"location_help\": true}"
+  },
+  "location:r:options": {
+    "text": "TBD: options",
+    "next": "[{\"key\": \"summary:d:intro1\", \"label\": \"Finish up\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "location",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"location_help\": true}"
+  },
+  "passport:a:full-make-sense-no": {
+    "text": "Not quite yet...",
+    "next": "[{\"key\": \"passport:r:full-instructions-intro\", \"label\": \"Go back to the beginning of the full passport instructions again\"}, {\"key\": \"passport:q:full-name-change\", \"label\": \"\"}, {\"key\": \"passport:q:full-certification-letter\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:a:full-make-sense-yes": {
+    "text": "Yep!",
+    "next": "[{\"key\": \"passport:q:full-name-change\", \"label\": \"\"}, {\"key\": \"passport:q:full-certification-letter\", \"label\": \"\"}, {\"key\": \"location:q:intro\", \"label\": \"\"}]",
+    "type": "answer",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:q:full-certification-letter": {
+    "text": "Tell me more about this certification letter...",
+    "next": "[{\"key\": \"passport:r:full-certification-letter\", \"label\": \"\", \"use_child_text\": true}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{\"cert_help\": true}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:q:full-instructions-docs": {
+    "text": "What documentation do I need?",
+    "next": "[{\"key\": \"passport:r:full-req-1\", \"label\": \"Next Requirement\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:q:full-make-sense": {
+    "text": "Does that all make sense?",
+    "next": "[{\"key\": \"passport:a:full-make-sense-yes\", \"label\": \"\"}, {\"key\": \"passport:a:full-make-sense-no\", \"label\": \"\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:q:full-name-change": {
+    "text": "So then, what if I've had a name change?",
+    "next": "[{\"key\": \"passport:r:full-name-change\", \"label\": \"\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{\"name_change_help\": true}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:q:full-req-minor-single-parent": {
+    "text": "What if only one parent can make it?",
+    "next": "[{\"key\": \"passport:r:full-req-minor-single-parent-intro\", \"label\": \"Next Requirement\"}]",
+    "type": "question",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-certification-letter": {
+    "text": "<Placeholder for cert info>",
+    "next": "[{\"key\": \"passport:q:full-make-sense\", \"label\": \"Back to the instructions\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"cert_help\": true}"
+  },
+  "passport:r:full-instructions-intro": {
+    "text": "To get your accurate passport, you're going to have to apply in person at a passport acceptance facility or passport agency with a DS-11 form (and all your documentation.)",
+    "next": "[{\"key\": \"passport:q:full-instructions-docs\", \"label\": \"\"}, {\"key\": \"\", \"label\": \"DS-11?\", \"resource\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-name-change": {
+    "text": "If you have legally changed your name and it no long matches your identifying documents, just bring your court order with you!",
+    "next": "[{\"key\": \"passport:q:full-make-sense\", \"label\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"name_change_help\": true}"
+  },
+  "passport:r:full-req-1": {
+    "text": "Form DS-11",
+    "next": "[{\"key\": \"passport:r:full-req-2\", \"label\": \"Next Requirement\"}, {\"key\": \"\", \"label\": \"DS-11?\", \"resource\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-req-2": {
+    "text": "Proof of citizenship/proof of US non-citizen national status (Bring and original and a photocopy!)",
+    "next": "[{\"key\": \"passport:r:full-req-3\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-req-3": {
+    "text": "Photo identification that reflects your current appearance (original and photo copy)",
+    "next": "[{\"key\": \"passport:r:full-req-4\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-req-4": {
+    "text": "A color passport photo that resembles your current appearance (no glasses!)",
+    "next": "[{\"key\": \"passport:r:full-req-5\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-req-5": {
+    "text": "A Medical Certification letter that you have completed gender transition (Don't worry, surgery is not a requirement!)",
+    "next": "[{\"key\": \"passport:q:full-make-sense\", \"label\": \"\"}, {\"key\": \"passport:r:full-req-minor-intro\", \"label\": \"Show me those instructions again\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false}"
+  },
+  "passport:r:full-req-minor-1": {
+    "text": "The minor applying for a passport must be present, as well as both parents to give permission.",
+    "next": "[{\"key\": \"passport:r:full-req-minor-2\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-2": {
+    "text": "Evidence of the child/parent (or guardian) relationship",
+    "next": "[{\"key\": \"passport:r:full-req-minor-3\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-3": {
+    "text": "Parent/guardian photo identification (original and photocopy)",
+    "next": "[{\"key\": \"passport:q:full-make-sense\", \"label\": \"\"}, {\"key\": \"passport:q:full-req-minor-single-parent\", \"label\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-intro": {
+    "text": "To help a minor apply for a passport you need...",
+    "next": "[{\"key\": \"passport:r:full-req-minor-1\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-single-parent-intro": {
+    "text": "In the case that only one parent can attend to provide consent\nfor a minor applicant, you have a few hoops you can jump through to proceed:",
+    "next": "[{\"key\": \"passport:r:full-req-minor-single-parent-req-1\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-single-parent-req-1": {
+    "text": "Second parent's notarized written statement or DS-3053 (including the child's full name and date of birth) consenting to the passport issuance for the child. The notarized statement cannot be more than three months old and must be signed and notarized on the same day, and must come with a photocopy of the front and back side of the second parent's government-issued photo identification",
+    "next": "[{\"key\": \"passport:r:full-req-minor-single-parent-req-2\", \"label\": \"Next Requirement\"}, {\"key\": \"\", \"label\": \"DS-3053?\", \"resource\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-single-parent-req-2": {
+    "text": "Second parent’s death certificate if second parent is deceased",
+    "next": "[{\"key\": \"passport:r:full-req-minor-single-parent-req-3\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-single-parent-req-3": {
+    "text": "Primary evidence of sole authority to apply, such as a court order",
+    "next": "[{\"key\": \"passport:r:full-req-minor-single-parent-req-4\", \"label\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:full-req-minor-single-parent-req-4": {
+    "text": "Written statement or DS-5525 (made under penalty of perjury) explaining in detail the second parent's unavailability",
+    "next": "[{\"key\": \"passport:q:full-make-sense\", \"label\": \"\"}, {\"key\": \"\", \"label\": \"DS-5525?\", \"resource\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"has_limited_passport\": false, \"is_parent\": true}"
+  },
+  "passport:r:limited-upgrade-instructions": {
+    "text": "The very best part of this application is that you can MAIL it. Great, right? <TBD: sending instructions, explanation of expediting fees>",
+    "next": "[{\"key\": \"summary:d:intro1\", \"label\": \"Finish up!\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-intro": {
+    "text": "Luckily, there's no fee for applying to upgrade to a full 10 year passport book from a valid limited two year passport issued for while you were undergoing gender transition.",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-req\", \"label\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-req": {
+    "text": "You'll need:",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-req-1\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-req-1": {
+    "text": "Form DS-5504",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-req-2\", \"label\": \"Next Requirement\"}, {\"key\": \"\", \"label\": \"DS-5504?\", \"resource\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-req-2": {
+    "text": "Your still-valid limited passport book",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-req-3\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-req-3": {
+    "text": "A color passport photo that resembles your current appearance (no glasses!)",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-req-4\", \"label\": \"Next Requirement\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "passport:r:limited-upgrade-req-4": {
+    "text": "A Medical Certification letter that you have completed gender transition (Don't worry, surgery is not a requirement!)",
+    "next": "[{\"key\": \"passport:r:limited-upgrade-instructions\", \"label\": \"\"}]",
+    "type": "recommendation",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "passport",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true, \"is_trans\": true, \"has_limited_passport\": true}"
+  },
+  "summary:d:intro1": {
+    "text": "Well, it looks like you're all set! Feel free to run back through this utility if you want to review anything, but here's a quick cheat sheet of what you'll need, plus some additional resources. Bon Voyage!",
+    "next": "[]",
+    "type": "description",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "summary",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true}"
+  },
+  "summary:d:intro2": {
+    "text": "Congrats on the shiny new passport you'll have soon! Here's a quick summary of what you'll need, just in case you want a reference handy. Feel free to run back through the utility if there's something else you want to check out!",
+    "next": "[]",
+    "type": "description",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "summary",
+    "result": "{}",
+    "depends_on": "{\"eligible\": true}"
+  },
+  "summary:d:intro3": {
+    "text": "Sorry we couldn't help you! Let us know if there's any functionality we can add, and of course share this resource with your friends and relatives!",
+    "next": "[]",
+    "type": "description",
+    "backlink": "",
+    "next_on_complete": "",
+    "section": "summary",
+    "result": "{}",
+    "depends_on": "{}"
   }
 }

@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import { connect } from 'react-redux';
 import { setCurrentNode, startOver } from '../actions/index';
 import { Link, browserHistory } from 'react-router';
+import ExternalButton from '../components/button_external';
 
 class RecommendationsContainer extends Component {
 	static contextTypes = {
@@ -19,17 +20,13 @@ class RecommendationsContainer extends Component {
 	collectRecommendations() {
 		const recs = this.props.recommendations;
 		const results = this.props.results;
-		const myRecommendations = []
+		const myRecs = []
 
-		for (var key in recs) {
-			myRecommendations.push(recs[key]);
+		if (results.eligible) {
+			myRecs.push(recs.ds_11)
 		}
 
-		myRecommendations.map( r => {
-
-		})
-
-		return myRecommendations;
+		return myRecs;
 	}
 
 	startingOver(e) {
@@ -40,7 +37,8 @@ class RecommendationsContainer extends Component {
 	}
 
 	render() {
-		const myRecommendations = this.collectRecommendations();
+		const myRecs = this.collectRecommendations();
+		const recs = this.props.recommendations;
 		const results = this.props.results;
 		if (results.eligible && results.change_gender) {
 			return (
@@ -49,9 +47,9 @@ class RecommendationsContainer extends Component {
 					<p>If you follow these steps, you'll have a new passport in a few weeks.</p>
 					<p>This is what you need to do:</p>
 					<ol>
-						{ myRecommendations.map( (r, key) => {
+						{ myRecs.map( (r, key) => {
 							return (
-								<li key={key}>{r.text} <button onClick={this.startingOver}>{r.button_text}</button></li>
+								<li key={key}><ExternalButton text={r.text} link={r.resource} button_text={r.button_text} /></li>
 							)
 						})}
 					</ol>
@@ -61,14 +59,19 @@ class RecommendationsContainer extends Component {
 		} else if (results.no_change) {
 			return (
 				<div>
-					Sorry about that<br />
+					<ExternalButton text={recs.no_change.text} link={recs.no_change.resource} button_text={recs.no_change.button_text} />
+					<button className='start-over' onClick={this.startingOver}>Start Over</button>
+				</div>
+			)
+		} else if (!results.citizen) {
+			return (
+			  <div>
+			  	<ExternalButton text={recs.apply_citizen.text} link={recs.apply_citizen.resource} button_text={recs.apply_citizen.button_text} />
 					<button className='start-over' onClick={this.startingOver}>Start Over</button>
 				</div>
 			)
 		} else {
-			return (<div>boop<br />
-					<button className='start-over' onClick={this.startingOver}>Start Over</button>
-			</div>)
+			return (<div>boop <button className='start-over' onClick={this.startingOver}>Start Over</button></div>)
 		}
 	}
 }
